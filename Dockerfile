@@ -3,10 +3,15 @@
 # NOTE: before running the build-docker GH action edit
 #       build-docker.yml and change the release channel from :latest to :testing
 
+
+
 # Builder image
 FROM clojure:temurin-11-tools-deps-1.11.1.1208-bullseye-slim as builder
 
 ARG DEBIAN_FRONTEND=noninteractive
+
+# Increase Java heap size
+ENV JAVA_OPTS="-Xmx2g"
 
 # Install reqs
 RUN apt-get update && apt-get install -y --no-install-recommends \
